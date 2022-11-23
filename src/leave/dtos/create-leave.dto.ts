@@ -1,11 +1,8 @@
 import { IsEmail, IsString } from 'class-validator';
 
-enum select {
-  'half',
-  'full',
-}
 export class CreateLeaveDto {
-  subject: select;
+  @IsString()
+  subject: string;
 
   @IsString()
   reason: string;

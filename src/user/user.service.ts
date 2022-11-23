@@ -23,16 +23,16 @@ export class UserService {
   }
 
   async findAll(): Promise<User[]> {
-    return this.userModel.find().exec();
+    return this.userModel.find({isactive:true}).exec();
   }
 
   async find(email: string): Promise<User> {
-    const user = await this.userModel.findOne({ email });
+    const user = await this.userModel.findOne({ email, isactive: true });
     return user;
   }
 
   async getUserById(id: mongoose.Schema.Types.ObjectId): Promise<User> {
-    const user = await this.userModel.findById(id);
+    const user = await this.userModel.findOne({ _id: id, isactive: true });
     if (!user) {
       throw new Error("user not found");
     }
@@ -43,7 +43,7 @@ export class UserService {
     id: mongoose.Schema.Types.ObjectId,
     updateUser: UserUpdateDto
   ): Promise<User> {
-    const user = await this.userModel.findById(id);
+    const user = await this.userModel.findOne({ _id: id, isactive: true });
     if (!user) {
       throw new NotFoundException("User Does Not Exist");
     }
@@ -57,11 +57,15 @@ export class UserService {
     if (!user) {
       throw new NotFoundException("User Does Not Exist");
     }
-    await user.remove();
+    user.isactive = false;
+    await user.save();
   }
 
   async checkadmin(email: string): Promise<boolean> {
-    const user = await this.userModel.findOne({ email });
+    const user = await this.userModel.findOne({ email,isactive:true});
+    if(!user){
+      throw new NotFoundException("Admin Not Found")
+    }
     if (!user.admin) {
       return false;
     }
@@ -69,11 +73,11 @@ export class UserService {
   }
 
   async entermail(email: string) {
-    const user = await this.userModel.findOne({ email });
+    const user = await this.userModel.findOne({ email, isactive: true });
     if (!user) {
       throw new NotFoundException("User not found");
     }
-    console.log('user',user)
+    // console.log('user',user)
     let token = await this.tokenModel.findOne({owner:user._id});
     if(!token){
       token =await new this.tokenModel({
@@ -99,15 +103,19 @@ export class UserService {
     await transporter.sendMail({
       from: "hitpatelp79@gmail.com", // sender address
       to: email, // list of receivers
-      subject: "Hello", // Subject line
-      text: link, // plain text body
+      subject: "Change PassWord", // Subject line
+      text: this.formatEmail(link), // plain text body
       // html body
     });
   }
 
+  formatEmail(link:string){
+    return `This is Link To Change Password , If You Want To Change Please Enter Link        ${link}`;
+  }
+
   async forgetpassword(userid:string, token:string,password:string){
 
-    const user =await this.userModel.findById(userid);
+    const user = await this.userModel.findOne({ _id: userid, isactive: true });
     if(!user){
       throw new HttpException("Link expired", HttpStatus.BAD_REQUEST);
     }

@@ -1,12 +1,9 @@
 import { Expose } from "class-transformer";
 
-enum select {
-  "half",
-  "full",
-}
+
 export class LeaveDto {
   @Expose()
-  subject: select;
+  subject: string;
 
   @Expose()
   reason: string;

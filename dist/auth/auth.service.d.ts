@@ -10,7 +10,8 @@ export declare class AuthService {
     constructor(userService: UserService, jwtservice: JwtService);
     signup(createUserDto: CreateUserDto): Promise<User>;
     signin(authCredentialsDto: AuthCredentialsDto): Promise<{
-        accessMessage: string;
+        accessToken: string;
+        user: User;
     }>;
     googleLogin(req: any): "No user from google" | {
         message: string;

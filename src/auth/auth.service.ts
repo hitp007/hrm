@@ -5,7 +5,8 @@ import { User } from 'src/user/schema/user.schema';
 import { UserService } from 'src/user/user.service';
 import { AuthCredentialsDto } from './dtos/user-auth-credentials.dto';
 import * as bcrypt from "bcrypt";
-
+import { Serialize } from 'src/Interceptors/serialize.interceptors';
+import { signInDto } from './dtos/signin.dto';
 @Injectable()
 export class AuthService {
   jwtService: any;
@@ -15,24 +16,28 @@ export class AuthService {
   ) {}
 
   async signup(createUserDto: CreateUserDto): Promise<User> {
-    return await this.userService.create(createUserDto);
+    const user= await this.userService.create(createUserDto);
+    return user;
   }
 
   async signin(
     authCredentialsDto: AuthCredentialsDto,
-  ): Promise<{ accessMessage: string }> {
-    const email: string = authCredentialsDto.email;
-    const user: any = await this.userService.find(email);
+  ) {
+    const email = authCredentialsDto.email;
+    const user= await this.userService.find(email);
+    if(!user){
+       throw new UnauthorizedException("Incorrect login credentials! Email");
+    }
    //we are compaaring password.
    const isMatch = await bcrypt.compare(authCredentialsDto.password, user.password);
    // user not found and password is not match.
-   if (!user || !isMatch) {
-      throw new UnauthorizedException('Incorrect login credentials!');
+   if (!isMatch) {
+      throw new UnauthorizedException('Incorrect login credentials! Password');
     }
     const typeid = user._id;
     const payload = { email, typeid };
-    const accessMessage: string = this.jwtservice.sign(payload);
-    return { accessMessage };
+    const accessToken: string = this.jwtservice.sign(payload);
+    return { accessToken, user};
   }
 
   //created for testing login functionality using gmail

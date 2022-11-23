@@ -81,7 +81,7 @@ export class LeaveService {
         leave.approve = true;
         const user = await this.userService.getUserById(leave.owner);
         let daysleave = this.getleavedays(leave.start,leave.end);
-        if(leave.subject == 0){daysleave = daysleave /2;}
+        if(leave.subject == "half"){daysleave = daysleave /2;}
         user.availeave = user.availeave - daysleave;
         user.usedleave = user.usedleave + daysleave;
         await leave.save();
@@ -89,9 +89,9 @@ export class LeaveService {
     }
   }
 
-  async updateleave(userid: mongoose.Schema.Types.ObjectId,leaveid: mongoose.Schema.Types.ObjectId,editdata: UpdateLeaveDto): Promise<Leave> {
+  async updateleave(owner:boolean,userid: mongoose.Schema.Types.ObjectId,leaveid: mongoose.Schema.Types.ObjectId,editdata: UpdateLeaveDto): Promise<Leave> {
     const leave = await this.leaveModel.findById(leaveid);
-    if (userid.toString() !== leave.owner.toString()) {
+    if (!owner && userid.toString() !== leave.owner.toString()) {
       throw new HttpException('User Dont Have Access To Edit for this Leave',HttpStatus.BAD_REQUEST);
     }
     Object.assign(leave, editdata);

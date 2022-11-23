@@ -7,6 +7,7 @@ import {
   Patch,
   Post,
   Req,
+  Res,
   UseGuards,
 } from '@nestjs/common';
 import mongoose from 'mongoose';
@@ -38,7 +39,10 @@ export class LeaveController {
   }
 
   @Post()
-  applyleave(@Req() req, @Body() body: CreateLeaveDto) {
+  applyleave(@Req() req,@Res() res,@Body() body: CreateLeaveDto) {
+    if(req.user.admin){
+      return res.status(401).send("Admin Can Not Apply Leave.");
+    }
     return this.leaveService.applyleave(req.user.id, body);
   }
 
@@ -54,7 +58,7 @@ export class LeaveController {
     @Param('id') id: mongoose.Schema.Types.ObjectId,
     @Body() editdata: UpdateLeaveDto,
   ) {
-    this.leaveService.updateleave(req.user.id, id, editdata);
+    this.leaveService.updateleave(req.user.owner,req.user.id, id, editdata);
   }
 
   @Delete(':id')

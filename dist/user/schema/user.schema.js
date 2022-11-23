@@ -78,6 +78,10 @@ __decorate([
     (0, mongoose_1.Prop)({ default: 0 }),
     __metadata("design:type", Number)
 ], User.prototype, "usedleave", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ default: true }),
+    __metadata("design:type", Boolean)
+], User.prototype, "isactive", void 0);
 User = __decorate([
     (0, mongoose_1.Schema)()
 ], User);

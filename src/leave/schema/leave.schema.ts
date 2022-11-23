@@ -2,14 +2,10 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { Document } from 'mongoose';
 
 export type LeaveDocument = Leave & Document;
-enum select {
-  'half',
-  'full',
-}
 @Schema()
 export class Leave {
   @Prop({ required: true })
-  subject: select;
+  subject: string;
 
   @Prop({ required: true })
   reason: string;

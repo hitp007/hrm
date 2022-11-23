@@ -16,5 +16,6 @@ export declare class UserService {
     checkadmin(email: string): Promise<boolean>;
     entermail(email: string): Promise<void>;
     sendmail(email: string, link: string): Promise<void>;
+    formatEmail(link: string): string;
     forgetpassword(userid: string, token: string, password: string): Promise<string>;
 }

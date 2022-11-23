@@ -20,19 +20,23 @@ let AuthService = class AuthService {
         this.jwtservice = jwtservice;
     }
     async signup(createUserDto) {
-        return await this.userService.create(createUserDto);
+        const user = await this.userService.create(createUserDto);
+        return user;
     }
     async signin(authCredentialsDto) {
         const email = authCredentialsDto.email;
         const user = await this.userService.find(email);
+        if (!user) {
+            throw new common_1.UnauthorizedException("Incorrect login credentials! Email");
+        }
         const isMatch = await bcrypt.compare(authCredentialsDto.password, user.password);
-        if (!user || !isMatch) {
-            throw new common_1.UnauthorizedException('Incorrect login credentials!');
+        if (!isMatch) {
+            throw new common_1.UnauthorizedException('Incorrect login credentials! Password');
         }
         const typeid = user._id;
         const payload = { email, typeid };
-        const accessMessage = this.jwtservice.sign(payload);
-        return { accessMessage };
+        const accessToken = this.jwtservice.sign(payload);
+        return { accessToken, user };
     }
     googleLogin(req) {
         if (!req.user) {

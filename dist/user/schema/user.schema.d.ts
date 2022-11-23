@@ -19,5 +19,6 @@ export declare class User {
     admin: boolean;
     availeave: number;
     usedleave: number;
+    isactive: boolean;
 }
 export declare const UserSchema: mongoose.Schema<User, mongoose.Model<User, any, any, any, any>, {}, {}, {}, {}, "type", User>;

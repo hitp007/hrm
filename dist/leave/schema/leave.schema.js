@@ -12,16 +12,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.LeaveSchema = exports.Leave = void 0;
 const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
-var select;
-(function (select) {
-    select[select["half"] = 0] = "half";
-    select[select["full"] = 1] = "full";
-})(select || (select = {}));
 let Leave = class Leave {
 };
 __decorate([
     (0, mongoose_1.Prop)({ required: true }),
-    __metadata("design:type", Number)
+    __metadata("design:type", String)
 ], Leave.prototype, "subject", void 0);
 __decorate([
     (0, mongoose_1.Prop)({ required: true }),

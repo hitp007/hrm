@@ -33,14 +33,17 @@ let LeaveController = class LeaveController {
     findLeaveForUser(req) {
         return this.leaveService.findleave(req.user.id);
     }
-    applyleave(req, body) {
+    applyleave(req, res, body) {
+        if (req.user.admin) {
+            return res.status(401).send("Admin Can Not Apply Leave.");
+        }
         return this.leaveService.applyleave(req.user.id, body);
     }
     approveleave(body) {
         return this.leaveService.approveleave(body);
     }
     updateleave(req, id, editdata) {
-        this.leaveService.updateleave(req.user.id, id, editdata);
+        this.leaveService.updateleave(req.user.owner, req.user.id, id, editdata);
     }
     deleteleave(req, id) {
         this.leaveService.deleteleave(req.user.id, id);
@@ -63,9 +66,10 @@ __decorate([
 __decorate([
     (0, common_1.Post)(),
     __param(0, (0, common_1.Req)()),
-    __param(1, (0, common_1.Body)()),
+    __param(1, (0, common_1.Res)()),
+    __param(2, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, create_leave_dto_1.CreateLeaveDto]),
+    __metadata("design:paramtypes", [Object, Object, create_leave_dto_1.CreateLeaveDto]),
     __metadata("design:returntype", void 0)
 ], LeaveController.prototype, "applyleave", null);
 __decorate([

@@ -30,10 +30,4 @@ export class UserUpdateDto {
 
   @IsOptional()
   profile: Buffer;
-
-  @IsOptional()
-  createdAt: Date;
-
-  @IsOptional()
-  ModifiedAt: Date;
 }

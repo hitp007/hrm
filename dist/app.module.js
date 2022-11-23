@@ -15,6 +15,8 @@ const attendance_module_1 = require("./attendance/attendance.module");
 const auth_module_1 = require("./auth/auth.module");
 const config_1 = require("@nestjs/config");
 const config_schema_1 = require("./config/config.schema");
+const core_1 = require("@nestjs/core");
+const transform_interceptor_1 = require("./Interceptors/transform.interceptor");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -44,7 +46,12 @@ AppModule = __decorate([
             }),
         ],
         controllers: [],
-        providers: [],
+        providers: [
+            {
+                provide: core_1.APP_INTERCEPTOR,
+                useClass: transform_interceptor_1.TransformInterceptor,
+            },
+        ],
     })
 ], AppModule);
 exports.AppModule = AppModule;

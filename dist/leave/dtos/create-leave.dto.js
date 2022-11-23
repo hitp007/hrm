@@ -11,13 +11,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateLeaveDto = void 0;
 const class_validator_1 = require("class-validator");
-var select;
-(function (select) {
-    select[select["half"] = 0] = "half";
-    select[select["full"] = 1] = "full";
-})(select || (select = {}));
 class CreateLeaveDto {
 }
+__decorate([
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateLeaveDto.prototype, "subject", void 0);
 __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)

@@ -53,13 +53,5 @@ __decorate([
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", Buffer)
 ], UserUpdateDto.prototype, "profile", void 0);
-__decorate([
-    (0, class_validator_1.IsOptional)(),
-    __metadata("design:type", Date)
-], UserUpdateDto.prototype, "createdAt", void 0);
-__decorate([
-    (0, class_validator_1.IsOptional)(),
-    __metadata("design:type", Date)
-], UserUpdateDto.prototype, "ModifiedAt", void 0);
 exports.UserUpdateDto = UserUpdateDto;
 //# sourceMappingURL=user-update.dto.js.map

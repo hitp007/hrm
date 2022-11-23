@@ -6,6 +6,8 @@ import { AttendanceModule } from './attendance/attendance.module';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { configValidationSchema } from './config/config.schema';
+import { APP_INTERCEPTOR } from '@nestjs/core';
+import { TransformInterceptor } from './Interceptors/transform.interceptor';
 
 @Module({
   imports: [
@@ -34,6 +36,11 @@ import { configValidationSchema } from './config/config.schema';
     }),
   ],
   controllers: [],
-  providers: [],
+  providers: [
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: TransformInterceptor,
+    },
+  ],
 })
 export class AppModule {}

@@ -55,6 +55,8 @@ export class User {
   @Prop({ default: 0 })
   usedleave: number;
 
+  @Prop({default:true})
+  isactive:boolean;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

@@ -31,21 +31,21 @@ let UserService = class UserService {
         return createdUser;
     }
     async findAll() {
-        return this.userModel.find().exec();
+        return this.userModel.find({ isactive: true }).exec();
     }
     async find(email) {
-        const user = await this.userModel.findOne({ email });
+        const user = await this.userModel.findOne({ email, isactive: true });
         return user;
     }
     async getUserById(id) {
-        const user = await this.userModel.findById(id);
+        const user = await this.userModel.findOne({ _id: id, isactive: true });
         if (!user) {
             throw new Error("user not found");
         }
         return user;
     }
     async updateUser(id, updateUser) {
-        const user = await this.userModel.findById(id);
+        const user = await this.userModel.findOne({ _id: id, isactive: true });
         if (!user) {
             throw new common_1.NotFoundException("User Does Not Exist");
         }
@@ -58,21 +58,24 @@ let UserService = class UserService {
         if (!user) {
             throw new common_1.NotFoundException("User Does Not Exist");
         }
-        await user.remove();
+        user.isactive = false;
+        await user.save();
     }
     async checkadmin(email) {
-        const user = await this.userModel.findOne({ email });
+        const user = await this.userModel.findOne({ email, isactive: true });
+        if (!user) {
+            throw new common_1.NotFoundException("Admin Not Found");
+        }
         if (!user.admin) {
             return false;
         }
         return true;
     }
     async entermail(email) {
-        const user = await this.userModel.findOne({ email });
+        const user = await this.userModel.findOne({ email, isactive: true });
         if (!user) {
             throw new common_1.NotFoundException("User not found");
         }
-        console.log('user', user);
         let token = await this.tokenModel.findOne({ owner: user._id });
         if (!token) {
             token = await new this.tokenModel({
@@ -97,12 +100,15 @@ let UserService = class UserService {
         await transporter.sendMail({
             from: "hitpatelp79@gmail.com",
             to: email,
-            subject: "Hello",
-            text: link,
+            subject: "Change PassWord",
+            text: this.formatEmail(link),
         });
     }
+    formatEmail(link) {
+        return `This is Link To Change Password , If You Want To Change Please Enter Link        ${link}`;
+    }
     async forgetpassword(userid, token, password) {
-        const user = await this.userModel.findById(userid);
+        const user = await this.userModel.findOne({ _id: userid, isactive: true });
         if (!user) {
             throw new common_1.HttpException("Link expired", common_1.HttpStatus.BAD_REQUEST);
         }

@@ -9,29 +9,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.LeaveDto = void 0;
+exports.signInDto = exports.Temp = void 0;
 const class_transformer_1 = require("class-transformer");
-class LeaveDto {
+class Temp {
+}
+exports.Temp = Temp;
+class signInDto {
 }
 __decorate([
     (0, class_transformer_1.Expose)(),
     __metadata("design:type", String)
-], LeaveDto.prototype, "subject", void 0);
+], signInDto.prototype, "accessToken", void 0);
 __decorate([
     (0, class_transformer_1.Expose)(),
-    __metadata("design:type", String)
-], LeaveDto.prototype, "reason", void 0);
-__decorate([
-    (0, class_transformer_1.Expose)(),
-    __metadata("design:type", Date)
-], LeaveDto.prototype, "start", void 0);
-__decorate([
-    (0, class_transformer_1.Expose)(),
-    __metadata("design:type", Date)
-], LeaveDto.prototype, "end", void 0);
-__decorate([
-    (0, class_transformer_1.Expose)(),
-    __metadata("design:type", String)
-], LeaveDto.prototype, "admin", void 0);
-exports.LeaveDto = LeaveDto;
-//# sourceMappingURL=leave.dto.js.map
+    __metadata("design:type", Temp)
+], signInDto.prototype, "user", void 0);
+exports.signInDto = signInDto;
+//# sourceMappingURL=signin.dto.js.map

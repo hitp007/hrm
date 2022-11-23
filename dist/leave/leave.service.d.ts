@@ -14,6 +14,6 @@ export declare class LeaveService {
     checkleap(year: number): boolean;
     getleavedays(start: Date, end: Date): number;
     approveleave(leaverequest: LeaveRequestDto): Promise<void>;
-    updateleave(userid: mongoose.Schema.Types.ObjectId, leaveid: mongoose.Schema.Types.ObjectId, editdata: UpdateLeaveDto): Promise<Leave>;
+    updateleave(owner: boolean, userid: mongoose.Schema.Types.ObjectId, leaveid: mongoose.Schema.Types.ObjectId, editdata: UpdateLeaveDto): Promise<Leave>;
     deleteleave(userid: mongoose.Schema.Types.ObjectId, leaveid: mongoose.Schema.Types.ObjectId): Promise<void>;
 }

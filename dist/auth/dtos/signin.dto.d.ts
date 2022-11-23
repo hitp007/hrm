@@ -1,6 +1,5 @@
-/// <reference types="node" />
-export declare class UserUpdateDto {
-    password: string;
+export declare class Temp {
+    email: string;
     name: string;
     address: string;
     num: string;
@@ -9,5 +8,8 @@ export declare class UserUpdateDto {
     joindate: Date;
     birthdate: Date;
     ifsc: string;
-    profile: Buffer;
+}
+export declare class signInDto {
+    accessToken: string;
+    user: Temp;
 }
