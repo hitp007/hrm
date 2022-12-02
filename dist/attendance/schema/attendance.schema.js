@@ -35,7 +35,7 @@ __decorate([
     __metadata("design:type", mongoose_2.default.Schema.Types.ObjectId)
 ], Attendance.prototype, "owner", void 0);
 Attendance = __decorate([
-    (0, mongoose_1.Schema)()
+    (0, mongoose_1.Schema)({ timestamps: true })
 ], Attendance);
 exports.Attendance = Attendance;
 exports.AttendanceSchema = mongoose_1.SchemaFactory.createForClass(Attendance);

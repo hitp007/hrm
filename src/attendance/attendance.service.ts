@@ -12,8 +12,9 @@ export class AttendanceService {
 
 
   async intime(owner: string):Promise<Attendance> {
-   
+     const time = Date.now();
     const inTime = new Date(Date.now() + 19800000);
+    console.log(inTime,time);
     const date = new Date(inTime.getFullYear(),inTime.getMonth(),inTime.getDate() + 1);
     const checkAlreadyInOrNot = await this.attendanceModel.findOne({ date, owner });
     if(checkAlreadyInOrNot){

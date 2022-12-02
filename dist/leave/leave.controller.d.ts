@@ -8,8 +8,8 @@ export declare class LeaveController {
     constructor(leaveService: LeaveService);
     findLeaveAll(): Promise<import("./schema/leave.schema").Leave[]>;
     findLeaveForUser(req: any): Promise<import("./schema/leave.schema").Leave[]>;
-    applyleave(req: any, res: any, body: CreateLeaveDto): any;
+    applyleave(req: any, body: CreateLeaveDto): Promise<import("./schema/leave.schema").Leave>;
     approveleave(body: LeaveRequestDto): Promise<void>;
-    updateleave(req: any, id: mongoose.Schema.Types.ObjectId, editdata: UpdateLeaveDto): void;
-    deleteleave(req: any, id: mongoose.Schema.Types.ObjectId): void;
+    updateleave(req: any, id: mongoose.Schema.Types.ObjectId, editdata: UpdateLeaveDto): Promise<import("./schema/leave.schema").Leave>;
+    deleteleave(req: any, id: mongoose.Schema.Types.ObjectId): Promise<void>;
 }

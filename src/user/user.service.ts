@@ -6,6 +6,7 @@ import { CreateUserDto } from './dtos/create-user.dto';
 import { UserUpdateDto } from './dtos/user-update.dto';
 import { Token, TokenDocument } from './schema/token.schema';
 import { throwError } from 'rxjs';
+import { InputUserType } from './dtos/inputype.dto';
 const nodemailer = require("nodemailer");
 const crypto = require("crypto");
 
@@ -23,7 +24,7 @@ export class UserService {
   }
 
   async findAll(): Promise<User[]> {
-    return this.userModel.find({isactive:true}).exec();
+    return this.userModel.find({ isactive: true }).exec();
   }
 
   async find(email: string): Promise<User> {
@@ -62,9 +63,9 @@ export class UserService {
   }
 
   async checkadmin(email: string): Promise<boolean> {
-    const user = await this.userModel.findOne({ email,isactive:true});
-    if(!user){
-      throw new NotFoundException("Admin Not Found")
+    const user = await this.userModel.findOne({ email, isactive: true });
+    if (!user) {
+      throw new NotFoundException("Admin Not Found");
     }
     if (!user.admin) {
       return false;
@@ -78,19 +79,19 @@ export class UserService {
       throw new NotFoundException("User not found");
     }
     // console.log('user',user)
-    let token = await this.tokenModel.findOne({owner:user._id});
-    if(!token){
-      token =await new this.tokenModel({
+    let token = await this.tokenModel.findOne({ owner: user._id });
+    if (!token) {
+      token = await new this.tokenModel({
         owner: user._id,
         token: await crypto.randomBytes(32).toString("hex"),
       });
       token.save();
     }
     const link = `http://localhost:3000/user/${user._id}/${token.token}`;
-    await this.sendmail(user.email,link)
+    await this.sendmail(user.email, link);
   }
 
-  async sendmail(email: string,link:string) {
+  async sendmail(email: string, link: string) {
     let transporter = nodemailer.createTransport({
       host: "smtp.gmail.com",
       port: 465,
@@ -109,22 +110,21 @@ export class UserService {
     });
   }
 
-  formatEmail(link:string){
+  formatEmail(link: string) {
     return `This is Link To Change Password , If You Want To Change Please Enter Link        ${link}`;
   }
 
-  async forgetpassword(userid:string, token:string,password:string){
-
+  async forgetpassword(userid: string, token: string, password: string) {
     const user = await this.userModel.findOne({ _id: userid, isactive: true });
-    if(!user){
+    if (!user) {
       throw new HttpException("Link expired", HttpStatus.BAD_REQUEST);
     }
-    const gettoken = await this.tokenModel.findOne({token});
-    if(!gettoken){
-       throw new HttpException("Link expired", HttpStatus.BAD_REQUEST);
+    const gettoken = await this.tokenModel.findOne({ token });
+    if (!gettoken) {
+      throw new HttpException("Link expired", HttpStatus.BAD_REQUEST);
     }
     user.password = password;
-     await user.save();
-    return 'Changed Successfully';
+    await user.save();
+    return "Changed Successfully";
   }
 }

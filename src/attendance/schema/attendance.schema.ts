@@ -3,7 +3,7 @@ import mongoose, { Document } from 'mongoose';
 
 export type AttendanceDocument = Attendance & Document;
 
-@Schema()
+@Schema({timestamps:true})
 export class Attendance {
   _id: mongoose.Schema.Types.ObjectId;
 

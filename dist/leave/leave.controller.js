@@ -33,20 +33,17 @@ let LeaveController = class LeaveController {
     findLeaveForUser(req) {
         return this.leaveService.findleave(req.user.id);
     }
-    applyleave(req, res, body) {
-        if (req.user.admin) {
-            return res.status(401).send("Admin Can Not Apply Leave.");
-        }
-        return this.leaveService.applyleave(req.user.id, body);
+    async applyleave(req, body) {
+        return this.leaveService.applyleave(req.user.admin, req.user.id, body);
     }
     approveleave(body) {
         return this.leaveService.approveleave(body);
     }
     updateleave(req, id, editdata) {
-        this.leaveService.updateleave(req.user.owner, req.user.id, id, editdata);
+        return this.leaveService.updateleave(req.user.owner, req.user.id, id, editdata);
     }
     deleteleave(req, id) {
-        this.leaveService.deleteleave(req.user.id, id);
+        return this.leaveService.deleteleave(req.user.id, id);
     }
 };
 __decorate([
@@ -66,11 +63,10 @@ __decorate([
 __decorate([
     (0, common_1.Post)(),
     __param(0, (0, common_1.Req)()),
-    __param(1, (0, common_1.Res)()),
-    __param(2, (0, common_1.Body)()),
+    __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object, create_leave_dto_1.CreateLeaveDto]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:paramtypes", [Object, create_leave_dto_1.CreateLeaveDto]),
+    __metadata("design:returntype", Promise)
 ], LeaveController.prototype, "applyleave", null);
 __decorate([
     (0, common_1.UseGuards)(role_guard_1.RolesGuard),

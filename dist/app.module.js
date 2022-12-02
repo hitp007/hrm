@@ -17,6 +17,10 @@ const config_1 = require("@nestjs/config");
 const config_schema_1 = require("./config/config.schema");
 const core_1 = require("@nestjs/core");
 const transform_interceptor_1 = require("./Interceptors/transform.interceptor");
+const apollo_1 = require("@nestjs/apollo");
+const graphql_1 = require("@nestjs/graphql");
+const path_1 = require("path");
+const user_resolver_1 = require("./user/user.resolver");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -33,6 +37,10 @@ AppModule = __decorate([
             }),
             mongoose_1.MongooseModule.forRoot("mongodb://localhost/hrm", {
                 connectionName: "tokens",
+            }),
+            graphql_1.GraphQLModule.forRoot({
+                driver: apollo_1.ApolloDriver,
+                autoSchemaFile: (0, path_1.join)(process.cwd(), 'src/schema.gql'),
             }),
             user_module_1.UserModule,
             leave_module_1.LeaveModule,
@@ -51,6 +59,7 @@ AppModule = __decorate([
                 provide: core_1.APP_INTERCEPTOR,
                 useClass: transform_interceptor_1.TransformInterceptor,
             },
+            user_resolver_1.UserResolver,
         ],
     })
 ], AppModule);

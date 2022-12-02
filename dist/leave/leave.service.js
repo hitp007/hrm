@@ -31,8 +31,11 @@ let LeaveService = class LeaveService {
         const leaves = await this.leaveModel.find({ owner: id });
         return leaves;
     }
-    async applyleave(owner, createleave) {
+    async applyleave(adminx, owner, createleave) {
         const admin = createleave.admin;
+        if (adminx === 'admin') {
+            throw new common_1.HttpException("User Dont Have Access To Edit for this Leave", common_1.HttpStatus.BAD_REQUEST);
+        }
         if (!this.userService.checkadmin(admin)) {
             throw new common_1.HttpException('Please enter Valid Admin', common_1.HttpStatus.BAD_REQUEST);
         }

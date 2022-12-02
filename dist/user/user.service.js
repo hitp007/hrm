@@ -118,7 +118,7 @@ let UserService = class UserService {
         }
         user.password = password;
         await user.save();
-        return 'Changed Successfully';
+        return "Changed Successfully";
     }
 };
 UserService = __decorate([

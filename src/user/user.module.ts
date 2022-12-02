@@ -8,6 +8,7 @@ import { AuthService } from 'src/auth/auth.service';
 import { UserController } from './user.controller';
 import { AdminController } from './admin.controller';
 import { Token, TokenSchema } from './schema/token.schema';
+import { UserResolver } from './user.resolver';
 
 @Module({
   imports: [
@@ -22,7 +23,7 @@ import { Token, TokenSchema } from './schema/token.schema';
     ),
   ],
   controllers: [UserController, AdminController],
-  providers: [UserService, JwtService, AuthService],
+  providers: [UserService, JwtService, AuthService, UserResolver],
   exports: [UserService],
 })
 export class UserModule {}

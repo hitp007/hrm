@@ -43,7 +43,6 @@ export class UserController {
   deleteUserById(@Req() request): Promise<void> {
     const id = request.user.id;
     return this.userService.deleteUserById(id);
-    
   }
 
   @Post("enter-email")

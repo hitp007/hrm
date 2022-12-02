@@ -1,0 +1,27 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type UserType {
+  email: String
+  password: String
+  name: String
+  address: String
+  num: String
+  altnum: String
+  designation: String
+  joindate: DateTime
+  birthdate: DateTime
+  ifsc: String
+  createdAt: DateTime
+  ModifiedAt: DateTime
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Query {
+  users: [UserType!]!
+}

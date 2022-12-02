@@ -10,7 +10,7 @@ export declare class LeaveService {
     constructor(leaveModel: Model<LeaveDocument>, userService: UserService);
     allleave(): Promise<Leave[]>;
     findleave(id: mongoose.Schema.Types.ObjectId): Promise<Leave[]>;
-    applyleave(owner: mongoose.Schema.Types.ObjectId, createleave: CreateLeaveDto): Promise<Leave>;
+    applyleave(adminx: string, owner: mongoose.Schema.Types.ObjectId, createleave: CreateLeaveDto): Promise<Leave>;
     checkleap(year: number): boolean;
     getleavedays(start: Date, end: Date): number;
     approveleave(leaverequest: LeaveRequestDto): Promise<void>;

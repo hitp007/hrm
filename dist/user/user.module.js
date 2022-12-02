@@ -17,6 +17,7 @@ const auth_service_1 = require("../auth/auth.service");
 const user_controller_1 = require("./user.controller");
 const admin_controller_1 = require("./admin.controller");
 const token_schema_1 = require("./schema/token.schema");
+const user_resolver_1 = require("./user.resolver");
 let UserModule = class UserModule {
 };
 UserModule = __decorate([
@@ -27,7 +28,7 @@ UserModule = __decorate([
             mongoose_1.MongooseModule.forFeature([{ name: token_schema_1.Token.name, schema: token_schema_1.TokenSchema }], "tokens"),
         ],
         controllers: [user_controller_1.UserController, admin_controller_1.AdminController],
-        providers: [user_service_1.UserService, jwt_1.JwtService, auth_service_1.AuthService],
+        providers: [user_service_1.UserService, jwt_1.JwtService, auth_service_1.AuthService, user_resolver_1.UserResolver],
         exports: [user_service_1.UserService],
     })
 ], UserModule);

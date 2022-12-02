@@ -8,6 +8,11 @@ import { ConfigModule } from '@nestjs/config';
 import { configValidationSchema } from './config/config.schema';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { TransformInterceptor } from './Interceptors/transform.interceptor';
+import { ApolloDriverConfig, ApolloDriver } from '@nestjs/apollo';
+import { GraphQLModule } from '@nestjs/graphql';
+import { upperDirectiveTransformer } from './upper-case.directive';
+import { join } from 'path';
+import { UserResolver } from './user/user.resolver';
 
 @Module({
   imports: [
@@ -23,7 +28,10 @@ import { TransformInterceptor } from './Interceptors/transform.interceptor';
     MongooseModule.forRoot("mongodb://localhost/hrm", {
       connectionName: "tokens",
     }),
-
+     GraphQLModule.forRoot<ApolloDriverConfig>({
+      driver: ApolloDriver,
+      autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+    }),
     UserModule,
     LeaveModule,
     AttendanceModule,
@@ -41,6 +49,7 @@ import { TransformInterceptor } from './Interceptors/transform.interceptor';
       provide: APP_INTERCEPTOR,
       useClass: TransformInterceptor,
     },
+    UserResolver,
   ],
 })
 export class AppModule {}

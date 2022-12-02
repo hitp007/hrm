@@ -25,17 +25,25 @@ export class LeaveService {
     return leaves;
   }
 
-  async applyleave(owner: mongoose.Schema.Types.ObjectId,createleave: CreateLeaveDto): Promise<Leave> {
+  async applyleave(adminx:string,owner: mongoose.Schema.Types.ObjectId,createleave: CreateLeaveDto): Promise<Leave> {
     const admin = createleave.admin;
+   if(adminx==='admin'){
+    throw new HttpException(
+      "User Dont Have Access To Edit for this Leave",
+      HttpStatus.BAD_REQUEST
+    );}
     if (!this.userService.checkadmin(admin)) {
       throw new HttpException('Please enter Valid Admin',HttpStatus.BAD_REQUEST);
     }
+    
     if (createleave.start > createleave.end) {
       throw new HttpException('End Date Can not be Before Start',HttpStatus.BAD_REQUEST);
     }
     const newleave = new this.leaveModel(createleave);
     newleave.owner = owner;
+    // console.log('her')
     await newleave.save();
+    // console.log(newleave)
     return newleave;
   }
     

@@ -3,6 +3,8 @@ import {
   Controller,
   Delete,
   Get,
+  HttpException,
+  HttpStatus,
   Param,
   Patch,
   Post,
@@ -19,8 +21,6 @@ import { LeaveRequestDto } from './dtos/leave-request.dto';
 import { LeaveDto } from './dtos/leave.dto';
 import { UpdateLeaveDto } from './dtos/update-leave.dto';
 import { LeaveService } from './leave.service';
-
-
 @UseGuards(JwtAuthGuard)
 @Serialize(LeaveDto)
 @Controller('leave')
@@ -39,11 +39,10 @@ export class LeaveController {
   }
 
   @Post()
-  applyleave(@Req() req,@Res() res,@Body() body: CreateLeaveDto) {
-    if(req.user.admin){
-      return res.status(401).send("Admin Can Not Apply Leave.");
-    }
-    return this.leaveService.applyleave(req.user.id, body);
+  async applyleave(@Req() req,@Body() body: CreateLeaveDto) {
+  return this.leaveService.applyleave(req.user.admin,req.user.id, body);
+  
+    // console.log("done 2");
   }
 
   @UseGuards(RolesGuard)
@@ -58,12 +57,12 @@ export class LeaveController {
     @Param('id') id: mongoose.Schema.Types.ObjectId,
     @Body() editdata: UpdateLeaveDto,
   ) {
-    this.leaveService.updateleave(req.user.owner,req.user.id, id, editdata);
+   return this.leaveService.updateleave(req.user.owner,req.user.id, id, editdata);
   }
 
   @Delete(':id')
   deleteleave(@Req() req, @Param('id') id: mongoose.Schema.Types.ObjectId) {
-    this.leaveService.deleteleave(req.user.id, id);
+  return  this.leaveService.deleteleave(req.user.id, id);
   }
 }
 
