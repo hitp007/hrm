@@ -26,16 +26,16 @@ let AppModule = class AppModule {
 AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
-            mongoose_1.MongooseModule.forRoot(process.env.DB, {
+            mongoose_1.MongooseModule.forRoot(`mongodb+srv://hit:admin@cluster0.1om8ufm.mongodb.net/test`, {
                 connectionName: "users",
             }),
-            mongoose_1.MongooseModule.forRoot(process.env.DB, {
+            mongoose_1.MongooseModule.forRoot("mongodb+srv://hit:admin@cluster0.1om8ufm.mongodb.net/test", {
                 connectionName: "leaves",
             }),
-            mongoose_1.MongooseModule.forRoot(process.env.DB, {
+            mongoose_1.MongooseModule.forRoot("mongodb+srv://hit:admin@cluster0.1om8ufm.mongodb.net/test", {
                 connectionName: "attendances",
             }),
-            mongoose_1.MongooseModule.forRoot(process.env.DB, {
+            mongoose_1.MongooseModule.forRoot("mongodb+srv://hit:admin@cluster0.1om8ufm.mongodb.net/test", {
                 connectionName: "tokens",
             }),
             graphql_1.GraphQLModule.forRoot({
