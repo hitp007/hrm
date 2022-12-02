@@ -26,21 +26,21 @@ let AppModule = class AppModule {
 AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
-            mongoose_1.MongooseModule.forRoot("mongodb://localhost/hrm", {
+            mongoose_1.MongooseModule.forRoot(`mongodb+srv://hit:admin@cluster0.1om8ufm.mongodb.net/test`, {
                 connectionName: "users",
             }),
-            mongoose_1.MongooseModule.forRoot("mongodb://localhost/hrm", {
+            mongoose_1.MongooseModule.forRoot("mongodb+srv://hit:admin@cluster0.1om8ufm.mongodb.net/test", {
                 connectionName: "leaves",
             }),
-            mongoose_1.MongooseModule.forRoot("mongodb://localhost/hrm", {
+            mongoose_1.MongooseModule.forRoot("mongodb+srv://hit:admin@cluster0.1om8ufm.mongodb.net/test", {
                 connectionName: "attendances",
             }),
-            mongoose_1.MongooseModule.forRoot("mongodb://localhost/hrm", {
+            mongoose_1.MongooseModule.forRoot("mongodb+srv://hit:admin@cluster0.1om8ufm.mongodb.net/test", {
                 connectionName: "tokens",
             }),
             graphql_1.GraphQLModule.forRoot({
                 driver: apollo_1.ApolloDriver,
-                autoSchemaFile: (0, path_1.join)(process.cwd(), 'src/schema.gql'),
+                autoSchemaFile: (0, path_1.join)(process.cwd(), "src/schema.gql"),
             }),
             user_module_1.UserModule,
             leave_module_1.LeaveModule,

@@ -13,25 +13,41 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { upperDirectiveTransformer } from './upper-case.directive';
 import { join } from 'path';
 import { UserResolver } from './user/user.resolver';
+// import { ServeStaticModule } from "@nestjs/serve-static";
 
 @Module({
   imports: [
-    MongooseModule.forRoot("mongodb://localhost/hrm", {
-      connectionName: "users",
-    }),
-    MongooseModule.forRoot("mongodb://localhost/hrm", {
-      connectionName: "leaves",
-    }),
-    MongooseModule.forRoot("mongodb://localhost/hrm", {
-      connectionName: "attendances",
-    }),
-    MongooseModule.forRoot("mongodb://localhost/hrm", {
-      connectionName: "tokens",
-    }),
-     GraphQLModule.forRoot<ApolloDriverConfig>({
+    MongooseModule.forRoot(
+      `mongodb+srv://hit:admin@cluster0.1om8ufm.mongodb.net/test`,
+      {
+        connectionName: "users",
+      }
+    ),
+    MongooseModule.forRoot(
+      "mongodb+srv://hit:admin@cluster0.1om8ufm.mongodb.net/test",
+      {
+        connectionName: "leaves",
+      }
+    ),
+    MongooseModule.forRoot(
+      "mongodb+srv://hit:admin@cluster0.1om8ufm.mongodb.net/test",
+      {
+        connectionName: "attendances",
+      }
+    ),
+    MongooseModule.forRoot(
+      "mongodb+srv://hit:admin@cluster0.1om8ufm.mongodb.net/test",
+      {
+        connectionName: "tokens",
+      }
+    ),
+    GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
-      autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+      autoSchemaFile: join(process.cwd(), "src/schema.gql"),
     }),
+    // ServeStaticModule.forRoot({
+    //   rootPath: join(__dirname, "..", "client"),
+    // }),
     UserModule,
     LeaveModule,
     AttendanceModule,
