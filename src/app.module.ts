@@ -37,7 +37,7 @@ import { UserResolver } from './user/user.resolver';
     AuthModule,
     ConfigModule.forRoot({
       isGlobal: true,
-      envFilePath: [`./src/config/.env.${process.env.STAGE}`],
+      envFilePath: [`./src/config/.env.dev`],
       validationSchema: configValidationSchema,
       cache: true,
     }),

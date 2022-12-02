@@ -48,7 +48,7 @@ AppModule = __decorate([
             auth_module_1.AuthModule,
             config_1.ConfigModule.forRoot({
                 isGlobal: true,
-                envFilePath: [`./src/config/.env.${process.env.STAGE}`],
+                envFilePath: [`./src/config/.env.dev`],
                 validationSchema: config_schema_1.configValidationSchema,
                 cache: true,
             }),
