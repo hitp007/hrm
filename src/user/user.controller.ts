@@ -21,29 +21,29 @@ import { UserService } from './user.service';
 export class UserController {
   constructor(private userService: UserService) {}
 
-  @UseGuards(AuthGuard())
-  @Get("me")
-  getUserById(@Req() request): Promise<User> {
-    const id = request.user.id;
-    return this.userService.getUserById(id);
-  }
+  // @UseGuards(AuthGuard())
+  // @Get("me")
+  // getUserById(@Req() request): Promise<User> {
+  //   const id = request.user.id;
+  //   return this.userService.getUserById(id);
+  // }
 
-  @UseGuards(AuthGuard())
-  @Patch("me")
-  updateUser(
-    @Req() request,
-    @Body() userDataDto: UserUpdateDto
-  ): Promise<User> {
-    const id = request.user.id;
-    return this.userService.updateUser(id, userDataDto);
-  }
+  // @UseGuards(AuthGuard())
+  // @Patch("me")
+  // updateUser(
+  //   @Req() request,
+  //   @Body() userDataDto: UserUpdateDto
+  // ): Promise<User> {
+  //   const id = request.user.id;
+  //   return this.userService.updateUser(id, userDataDto);
+  // }
 
-  @UseGuards(AuthGuard())
-  @Delete("me")
-  deleteUserById(@Req() request): Promise<void> {
-    const id = request.user.id;
-    return this.userService.deleteUserById(id);
-  }
+  // @UseGuards(AuthGuard())
+  // @Delete("me")
+  // deleteUserById(@Req() request): Promise<void> {
+  //   const id = request.user.id;
+  //   return this.userService.deleteUserById(id);
+  // }
 
   @Post("enter-email")
   entermail(@Body() body) {

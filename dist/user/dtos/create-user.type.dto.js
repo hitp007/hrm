@@ -61,6 +61,10 @@ __decorate([
     (0, graphql_1.Field)({ nullable: true }),
     __metadata("design:type", Date)
 ], UserType.prototype, "ModifiedAt", void 0);
+__decorate([
+    (0, graphql_1.Field)({ nullable: true }),
+    __metadata("design:type", Boolean)
+], UserType.prototype, "admin", void 0);
 UserType = __decorate([
     (0, graphql_1.ObjectType)()
 ], UserType);

@@ -1,20 +1,22 @@
-import { IsOptional, IsString } from 'class-validator';
+import { Field, InputType } from '@nestjs/graphql';
+import { IsString } from 'class-validator';
 
 enum select {
   'half',
   'full',
 }
+@InputType()
 export class UpdateLeaveDto {
-  @IsOptional()
+
+  @Field()
   subject: select;
 
-  @IsOptional()
-  @IsString()
+  @Field()
   reason: string;
 
-  @IsOptional()
+  @Field()
   start: Date;
 
-  @IsOptional()
+  @Field()
   end: Date;
 }

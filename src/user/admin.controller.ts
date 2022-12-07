@@ -28,7 +28,7 @@ export class AdminController {
   }
 
   @Get('/:id')
-  getUserById(@Param('id') id: mongoose.Schema.Types.ObjectId): Promise<User> {
+  getUserById(@Param('id') id: string): Promise<User> {
     return this.userService.getUserById(id);
   }
 
@@ -39,7 +39,7 @@ export class AdminController {
 
   @Patch('/:id')
   updateUser(
-    @Param('id') id: mongoose.Schema.Types.ObjectId,
+    @Param('id') id: string,
     @Body() userDataDto: UserUpdateDto,
   ): Promise<User> {
     return this.userService.updateUser(id, userDataDto);
@@ -47,10 +47,10 @@ export class AdminController {
 
   @Delete('/:id')
   deleteUserById(
-    @Param('id') id: mongoose.Schema.Types.ObjectId,
-  ): Promise<void> {
-    const ret = this.userService.deleteUserById(id);
-    return ret;
+    @Param('id') id: string,
+  ) {
+   this.userService.deleteUserById(id);
+  return "deleted Successfully"
   }
 }
 

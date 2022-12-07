@@ -10,31 +10,37 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AttendanceSchema = exports.Attendance = void 0;
+const graphql_1 = require("@nestjs/graphql");
 const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
 let Attendance = class Attendance {
 };
 __decorate([
+    (0, graphql_1.Field)(),
     (0, mongoose_1.Prop)(),
     __metadata("design:type", Date)
 ], Attendance.prototype, "date", void 0);
 __decorate([
+    (0, graphql_1.Field)(),
     (0, mongoose_1.Prop)(),
     __metadata("design:type", Date)
 ], Attendance.prototype, "inTime", void 0);
 __decorate([
+    (0, graphql_1.Field)({ nullable: true }),
     (0, mongoose_1.Prop)(),
     __metadata("design:type", Date)
 ], Attendance.prototype, "outTime", void 0);
 __decorate([
+    (0, graphql_1.Field)({ nullable: true }),
     (0, mongoose_1.Prop)(),
     __metadata("design:type", Number)
 ], Attendance.prototype, "todaytime", void 0);
 __decorate([
-    (0, mongoose_1.Prop)({ type: mongoose_2.default.Schema.Types.ObjectId, ref: 'User' }),
+    (0, mongoose_1.Prop)({ type: mongoose_2.default.Schema.Types.ObjectId, ref: "User" }),
     __metadata("design:type", mongoose_2.default.Schema.Types.ObjectId)
 ], Attendance.prototype, "owner", void 0);
 Attendance = __decorate([
+    (0, graphql_1.ObjectType)(),
     (0, mongoose_1.Schema)({ timestamps: true })
 ], Attendance);
 exports.Attendance = Attendance;

@@ -7,6 +7,7 @@ import { UserUpdateDto } from './dtos/user-update.dto';
 import { Token, TokenDocument } from './schema/token.schema';
 import { throwError } from 'rxjs';
 import { InputUserType } from './dtos/inputype.dto';
+import { UserType } from './dtos/create-user.type.dto';
 const nodemailer = require("nodemailer");
 const crypto = require("crypto");
 
@@ -17,7 +18,7 @@ export class UserService {
     @InjectModel(Token.name, "tokens") private tokenModel: Model<TokenDocument>
   ) {}
 
-  async create(createUserDto: CreateUserDto): Promise<User> {
+  async create(createUserDto: InputUserType): Promise<User> {
     const createdUser = new this.userModel(createUserDto);
     await createdUser.save();
     return createdUser;
@@ -27,12 +28,13 @@ export class UserService {
     return this.userModel.find({ isactive: true }).exec();
   }
 
-  async find(email: string): Promise<User> {
-    const user = await this.userModel.findOne({ email, isactive: true });
+  async find(email: string){
+    const user= await this.userModel.findOne({ email, isactive: true });
+    // console.log('find',user);
     return user;
   }
 
-  async getUserById(id: mongoose.Schema.Types.ObjectId): Promise<User> {
+  async getUserById(id: string): Promise<User> {
     const user = await this.userModel.findOne({ _id: id, isactive: true });
     if (!user) {
       throw new Error("user not found");
@@ -41,7 +43,7 @@ export class UserService {
   }
 
   async updateUser(
-    id: mongoose.Schema.Types.ObjectId,
+    id: string,
     updateUser: UserUpdateDto
   ): Promise<User> {
     const user = await this.userModel.findOne({ _id: id, isactive: true });
@@ -53,13 +55,14 @@ export class UserService {
     return user;
   }
 
-  async deleteUserById(id: mongoose.Schema.Types.ObjectId) {
+  async deleteUserById(id: string) {
     const user = await this.userModel.findById(id);
     if (!user) {
       throw new NotFoundException("User Does Not Exist");
     }
     user.isactive = false;
     await user.save();
+    return `User ${user.email} Deleted Successfully`;
   }
 
   async checkadmin(email: string): Promise<boolean> {

@@ -14,13 +14,17 @@ export class TransformInterceptor<T>
     context: ExecutionContext,
     next: CallHandler
   ): Observable<any> {
+    console.log('now');
     return next
       .handle()
       .pipe(
-        map((data) => ({
+        map(
+          (data) => ({  
           status: context.switchToHttp().getResponse().statusCode,
-          data,
-        }))
+          data
+        })
+        )
+
       );
   }
 }

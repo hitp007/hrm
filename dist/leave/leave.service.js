@@ -88,7 +88,7 @@ let LeaveService = class LeaveService {
         else {
             if (!leave.approve) {
                 leave.approve = true;
-                const user = await this.userService.getUserById(leave.owner);
+                const user = await this.userService.getUserById(leave.owner.toString());
                 let daysleave = this.getleavedays(leave.start, leave.end);
                 if (leave.subject == "half") {
                     daysleave = daysleave / 2;
@@ -98,6 +98,7 @@ let LeaveService = class LeaveService {
                 await leave.save();
             }
         }
+        return leave;
     }
     async updateleave(owner, userid, leaveid, editdata) {
         const leave = await this.leaveModel.findById(leaveid);
@@ -114,6 +115,7 @@ let LeaveService = class LeaveService {
             throw new common_1.HttpException('User Dont Have Access To Edit for this Leave', common_1.HttpStatus.BAD_REQUEST);
         }
         await leave.remove();
+        return 'deleted Successfully';
     }
 };
 LeaveService = __decorate([

@@ -20,7 +20,7 @@ export class LeaveService {
     return leaves;
   }
 
-  async findleave(id: mongoose.Schema.Types.ObjectId): Promise<Leave[]> {
+  async findleave(id:string): Promise<Leave[]> {
     const leaves = await this.leaveModel.find({ owner: id });
     return leaves;
   }
@@ -53,7 +53,7 @@ export class LeaveService {
       }
       return false;
     }
-
+  
    getleavedays(start:Date ,end:Date ):number{
     let leap = this.checkleap(start.getFullYear())?29:28;
     let months = [31,leap,31,30,31,30,31,31,30,31,30,31];
@@ -87,17 +87,19 @@ export class LeaveService {
     } else {
       if (!leave.approve) {
         leave.approve = true;
-        const user = await this.userService.getUserById(leave.owner);
+        const user = await this.userService.getUserById(leave.owner.toString());
         let daysleave = this.getleavedays(leave.start,leave.end);
         if(leave.subject == "half"){daysleave = daysleave /2;}
         user.availeave = user.availeave - daysleave;
         user.usedleave = user.usedleave + daysleave;
         await leave.save();
+        
       }
     }
+      return leave;
   }
 
-  async updateleave(owner:boolean,userid: mongoose.Schema.Types.ObjectId,leaveid: mongoose.Schema.Types.ObjectId,editdata: UpdateLeaveDto): Promise<Leave> {
+  async updateleave(owner:boolean,userid: string,leaveid: string,editdata: UpdateLeaveDto): Promise<Leave> {
     const leave = await this.leaveModel.findById(leaveid);
     if (!owner && userid.toString() !== leave.owner.toString()) {
       throw new HttpException('User Dont Have Access To Edit for this Leave',HttpStatus.BAD_REQUEST);
@@ -107,11 +109,12 @@ export class LeaveService {
     return leave;
   }
 
-  async deleteleave(userid: mongoose.Schema.Types.ObjectId,leaveid: mongoose.Schema.Types.ObjectId) {
+  async deleteleave(userid: string,leaveid: string) {
     const leave = await this.leaveModel.findById(leaveid);
     if (userid.toString() !== leave.owner.toString()) {
       throw new HttpException('User Dont Have Access To Edit for this Leave',HttpStatus.BAD_REQUEST);
     }
     await leave.remove();
+    return 'deleted Successfully';
   }
 }

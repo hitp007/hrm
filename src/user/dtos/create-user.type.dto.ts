@@ -1,8 +1,12 @@
 import { Field, InputType, ObjectType } from "@nestjs/graphql";
 import { IsEmail, IsString } from "class-validator";
+import mongoose from "mongoose";
 
 @ObjectType()
 export class UserType {
+  // @Field({ nullable: true })
+  _id: mongoose.Schema.Types.ObjectId;
+
   @Field({ nullable: true })
   email: string;
 
@@ -38,4 +42,7 @@ export class UserType {
 
   @Field({ nullable: true })
   ModifiedAt: Date;
+
+  @Field({ nullable: true })
+  admin: boolean;
 }

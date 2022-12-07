@@ -41,8 +41,6 @@ export class LeaveController {
   @Post()
   async applyleave(@Req() req,@Body() body: CreateLeaveDto) {
   return this.leaveService.applyleave(req.user.admin,req.user.id, body);
-  
-    // console.log("done 2");
   }
 
   @UseGuards(RolesGuard)
@@ -54,14 +52,14 @@ export class LeaveController {
   @Patch(':id')
   updateleave(
     @Req() req,
-    @Param('id') id: mongoose.Schema.Types.ObjectId,
+    @Param('id') id: string,
     @Body() editdata: UpdateLeaveDto,
   ) {
    return this.leaveService.updateleave(req.user.owner,req.user.id, id, editdata);
   }
 
   @Delete(':id')
-  deleteleave(@Req() req, @Param('id') id: mongoose.Schema.Types.ObjectId) {
+  deleteleave(@Req() req, @Param('id') id: string) {
   return  this.leaveService.deleteleave(req.user.id, id);
   }
 }

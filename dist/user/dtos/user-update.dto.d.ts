@@ -1,4 +1,3 @@
-/// <reference types="node" />
 export declare class UserUpdateDto {
     password: string;
     name: string;
@@ -9,5 +8,4 @@ export declare class UserUpdateDto {
     joindate: Date;
     birthdate: Date;
     ifsc: string;
-    profile: Buffer;
 }

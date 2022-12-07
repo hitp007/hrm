@@ -10,48 +10,57 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserUpdateDto = void 0;
+const graphql_1 = require("@nestjs/graphql");
 const class_validator_1 = require("class-validator");
-class UserUpdateDto {
-}
+let UserUpdateDto = class UserUpdateDto {
+};
 __decorate([
+    (0, graphql_1.Field)({ nullable: true }),
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", String)
 ], UserUpdateDto.prototype, "password", void 0);
 __decorate([
+    (0, graphql_1.Field)({ nullable: true }),
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", String)
 ], UserUpdateDto.prototype, "name", void 0);
 __decorate([
+    (0, graphql_1.Field)({ nullable: true }),
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", String)
 ], UserUpdateDto.prototype, "address", void 0);
 __decorate([
+    (0, graphql_1.Field)({ nullable: true }),
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", String)
 ], UserUpdateDto.prototype, "num", void 0);
 __decorate([
+    (0, graphql_1.Field)({ nullable: true }),
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", String)
 ], UserUpdateDto.prototype, "altnum", void 0);
 __decorate([
+    (0, graphql_1.Field)({ nullable: true }),
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", String)
 ], UserUpdateDto.prototype, "designation", void 0);
 __decorate([
+    (0, graphql_1.Field)({ nullable: true }),
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", Date)
 ], UserUpdateDto.prototype, "joindate", void 0);
 __decorate([
+    (0, graphql_1.Field)({ nullable: true }),
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", Date)
 ], UserUpdateDto.prototype, "birthdate", void 0);
 __decorate([
+    (0, graphql_1.Field)({ nullable: true }),
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", String)
 ], UserUpdateDto.prototype, "ifsc", void 0);
-__decorate([
-    (0, class_validator_1.IsOptional)(),
-    __metadata("design:type", Buffer)
-], UserUpdateDto.prototype, "profile", void 0);
+UserUpdateDto = __decorate([
+    (0, graphql_1.InputType)()
+], UserUpdateDto);
 exports.UserUpdateDto = UserUpdateDto;
 //# sourceMappingURL=user-update.dto.js.map

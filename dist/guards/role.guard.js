@@ -8,10 +8,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RolesGuard = void 0;
 const common_1 = require("@nestjs/common");
+const graphql_1 = require("@nestjs/graphql");
 let RolesGuard = class RolesGuard {
     canActivate(context) {
-        const req = context.switchToHttp().getRequest();
-        return req.user.admin;
+        const ctx = graphql_1.GqlExecutionContext.create(context);
+        console.log(ctx.getContext().req.user);
+        return ctx.getContext().req.user.admin;
     }
 };
 RolesGuard = __decorate([

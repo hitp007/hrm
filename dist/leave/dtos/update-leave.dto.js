@@ -10,30 +10,32 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UpdateLeaveDto = void 0;
-const class_validator_1 = require("class-validator");
+const graphql_1 = require("@nestjs/graphql");
 var select;
 (function (select) {
     select[select["half"] = 0] = "half";
     select[select["full"] = 1] = "full";
 })(select || (select = {}));
-class UpdateLeaveDto {
-}
+let UpdateLeaveDto = class UpdateLeaveDto {
+};
 __decorate([
-    (0, class_validator_1.IsOptional)(),
+    (0, graphql_1.Field)(),
     __metadata("design:type", Number)
 ], UpdateLeaveDto.prototype, "subject", void 0);
 __decorate([
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)(),
+    (0, graphql_1.Field)(),
     __metadata("design:type", String)
 ], UpdateLeaveDto.prototype, "reason", void 0);
 __decorate([
-    (0, class_validator_1.IsOptional)(),
+    (0, graphql_1.Field)(),
     __metadata("design:type", Date)
 ], UpdateLeaveDto.prototype, "start", void 0);
 __decorate([
-    (0, class_validator_1.IsOptional)(),
+    (0, graphql_1.Field)(),
     __metadata("design:type", Date)
 ], UpdateLeaveDto.prototype, "end", void 0);
+UpdateLeaveDto = __decorate([
+    (0, graphql_1.InputType)()
+], UpdateLeaveDto);
 exports.UpdateLeaveDto = UpdateLeaveDto;
 //# sourceMappingURL=update-leave.dto.js.map

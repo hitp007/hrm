@@ -60,6 +60,7 @@ let UserService = class UserService {
         }
         user.isactive = false;
         await user.save();
+        return `User ${user.email} Deleted Successfully`;
     }
     async checkadmin(email) {
         const user = await this.userModel.findOne({ email, isactive: true });

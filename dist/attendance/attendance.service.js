@@ -82,6 +82,7 @@ let AttendanceService = class AttendanceService {
         attendance.todaytime = todaytime;
         attendance.outTime = outTime;
         await attendance.save();
+        return attendance;
     }
     showinhourandminute(num) {
         const hours = Math.floor((num / (60 * 60 * 1000)) % (60 * 60 * 1000));

@@ -9,11 +9,13 @@ export declare class LeaveService {
     private userService;
     constructor(leaveModel: Model<LeaveDocument>, userService: UserService);
     allleave(): Promise<Leave[]>;
-    findleave(id: mongoose.Schema.Types.ObjectId): Promise<Leave[]>;
+    findleave(id: string): Promise<Leave[]>;
     applyleave(adminx: string, owner: mongoose.Schema.Types.ObjectId, createleave: CreateLeaveDto): Promise<Leave>;
     checkleap(year: number): boolean;
     getleavedays(start: Date, end: Date): number;
-    approveleave(leaverequest: LeaveRequestDto): Promise<void>;
-    updateleave(owner: boolean, userid: mongoose.Schema.Types.ObjectId, leaveid: mongoose.Schema.Types.ObjectId, editdata: UpdateLeaveDto): Promise<Leave>;
-    deleteleave(userid: mongoose.Schema.Types.ObjectId, leaveid: mongoose.Schema.Types.ObjectId): Promise<void>;
+    approveleave(leaverequest: LeaveRequestDto): Promise<Leave & mongoose.Document<any, any, any> & {
+        _id: mongoose.Types.ObjectId;
+    }>;
+    updateleave(owner: boolean, userid: string, leaveid: string, editdata: UpdateLeaveDto): Promise<Leave>;
+    deleteleave(userid: string, leaveid: string): Promise<string>;
 }

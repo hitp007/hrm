@@ -11,7 +11,9 @@ export declare class AuthService {
     signup(createUserDto: CreateUserDto): Promise<User>;
     signin(authCredentialsDto: AuthCredentialsDto): Promise<{
         accessToken: string;
-        user: User;
+        user: User & import("mongoose").Document<any, any, any> & {
+            _id: import("mongoose").Types.ObjectId;
+        };
     }>;
     googleLogin(req: any): "No user from google" | {
         message: string;

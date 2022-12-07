@@ -1,33 +1,43 @@
+import { Field,InputType } from '@nestjs/graphql';
 import { IsOptional } from 'class-validator';
 
+@InputType()
 export class UserUpdateDto {
-  @IsOptional()
+  
+   @Field({ nullable: true })
+   @IsOptional()
   password: string;
 
-  @IsOptional()
+   @Field({ nullable: true })
+   @IsOptional()
   name: string;
 
-  @IsOptional()
+   @Field({ nullable: true })
+   @IsOptional()
   address: string;
 
-  @IsOptional()
+   @Field({ nullable: true })
+   @IsOptional()
   num: string;
 
-  @IsOptional()
+   @Field({ nullable: true })
+   @IsOptional()
   altnum: string;
 
-  @IsOptional()
+   @Field({ nullable: true })
+   @IsOptional()
   designation: string;
 
-  @IsOptional()
+   @Field({ nullable: true })
+   @IsOptional()
   joindate: Date;
 
-  @IsOptional()
+   @Field({ nullable: true })
+   @IsOptional()
   birthdate: Date;
 
-  @IsOptional()
+   @Field({ nullable: true })
+   @IsOptional()
   ifsc: string;
 
-  @IsOptional()
-  profile: Buffer;
 }

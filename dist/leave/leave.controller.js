@@ -14,7 +14,6 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.LeaveController = void 0;
 const common_1 = require("@nestjs/common");
-const mongoose_1 = require("mongoose");
 const jwt_auths_guards_1 = require("../auth/gaurds/jwt-auths.guards");
 const role_guard_1 = require("../guards/role.guard");
 const serialize_interceptors_1 = require("../Interceptors/serialize.interceptors");
@@ -82,7 +81,7 @@ __decorate([
     __param(1, (0, common_1.Param)('id')),
     __param(2, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, mongoose_1.default.Schema.Types.ObjectId, update_leave_dto_1.UpdateLeaveDto]),
+    __metadata("design:paramtypes", [Object, String, update_leave_dto_1.UpdateLeaveDto]),
     __metadata("design:returntype", void 0)
 ], LeaveController.prototype, "updateleave", null);
 __decorate([
@@ -90,7 +89,7 @@ __decorate([
     __param(0, (0, common_1.Req)()),
     __param(1, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, mongoose_1.default.Schema.Types.ObjectId]),
+    __metadata("design:paramtypes", [Object, String]),
     __metadata("design:returntype", void 0)
 ], LeaveController.prototype, "deleteleave", null);
 LeaveController = __decorate([

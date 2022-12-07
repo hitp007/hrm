@@ -1,4 +1,6 @@
+import mongoose from "mongoose";
 export declare class UserType {
+    _id: mongoose.Schema.Types.ObjectId;
     email: string;
     password: string;
     name: string;
@@ -11,4 +13,5 @@ export declare class UserType {
     ifsc: string;
     createdAt: Date;
     ModifiedAt: Date;
+    admin: boolean;
 }

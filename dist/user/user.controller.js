@@ -14,26 +14,12 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserController = void 0;
 const common_1 = require("@nestjs/common");
-const passport_1 = require("@nestjs/passport");
 const serialize_interceptors_1 = require("../Interceptors/serialize.interceptors");
-const user_update_dto_1 = require("./dtos/user-update.dto");
 const user_dto_1 = require("./dtos/user.dto");
 const user_service_1 = require("./user.service");
 let UserController = class UserController {
     constructor(userService) {
         this.userService = userService;
-    }
-    getUserById(request) {
-        const id = request.user.id;
-        return this.userService.getUserById(id);
-    }
-    updateUser(request, userDataDto) {
-        const id = request.user.id;
-        return this.userService.updateUser(id, userDataDto);
-    }
-    deleteUserById(request) {
-        const id = request.user.id;
-        return this.userService.deleteUserById(id);
     }
     entermail(body) {
         this.userService.entermail(body.email);
@@ -42,31 +28,6 @@ let UserController = class UserController {
         return this.userService.forgetpassword(userid, token, body.password);
     }
 };
-__decorate([
-    (0, common_1.UseGuards)((0, passport_1.AuthGuard)()),
-    (0, common_1.Get)("me"),
-    __param(0, (0, common_1.Req)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", Promise)
-], UserController.prototype, "getUserById", null);
-__decorate([
-    (0, common_1.UseGuards)((0, passport_1.AuthGuard)()),
-    (0, common_1.Patch)("me"),
-    __param(0, (0, common_1.Req)()),
-    __param(1, (0, common_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, user_update_dto_1.UserUpdateDto]),
-    __metadata("design:returntype", Promise)
-], UserController.prototype, "updateUser", null);
-__decorate([
-    (0, common_1.UseGuards)((0, passport_1.AuthGuard)()),
-    (0, common_1.Delete)("me"),
-    __param(0, (0, common_1.Req)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", Promise)
-], UserController.prototype, "deleteUserById", null);
 __decorate([
     (0, common_1.Post)("enter-email"),
     __param(0, (0, common_1.Body)()),

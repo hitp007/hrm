@@ -15,6 +15,7 @@ type UserType {
   ifsc: String
   createdAt: DateTime
   ModifiedAt: DateTime
+  admin: Boolean
 }
 
 """
@@ -22,6 +23,96 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+type Leave {
+  subject: String!
+  reason: String!
+  start: DateTime!
+  end: DateTime!
+  admin: String!
+  approve: Boolean
+}
+
+type Attendance {
+  date: DateTime!
+  inTime: DateTime!
+  outTime: DateTime
+  todaytime: Float
+}
+
+type AttendanceOut {
+  hours: Float
+  minutes: Float
+}
+
+type AttendanceOutforAll {
+  user: String
+  totaltime: AttendanceOut
+}
+
 type Query {
-  users: [UserType!]!
+  createUser(input: InputUserType!): UserType!
+  deleteUser(id: String!): UserType!
+  updateUser(id: String!, input: UserUpdateDto!): UserType!
+  getAllUsers: [UserType!]!
+  findLeaveAll: [Leave!]!
+  findLeaveforUser(id: String!): [Leave!]!
+  deleteleave(id: String!): Leave!
+  updateleave(id: String!, input: UpdateLeaveDto!): Leave!
+  approveleave(id: String!, input: LeaveRequestDto!): Leave!
+}
+
+input InputUserType {
+  email: String!
+  password: String!
+  name: String
+  address: String
+  num: String
+  altnum: String
+  designation: String
+  joindate: DateTime
+  birthdate: DateTime
+  ifsc: String
+}
+
+input UserUpdateDto {
+  password: String
+  name: String
+  address: String
+  num: String
+  altnum: String
+  designation: String
+  joindate: DateTime
+  birthdate: DateTime
+  ifsc: String
+}
+
+input UpdateLeaveDto {
+  subject: Float!
+  reason: String!
+  start: DateTime!
+  end: DateTime!
+}
+
+input LeaveRequestDto {
+  approve: Boolean!
+  id: String!
+}
+
+type Mutation {
+  user(email: String!): UserType!
+  userbyId(id: String!): UserType!
+  applyleave(input: LeaveInput!): Leave!
+  intime: Attendance!
+  outtime: Attendance!
+  totalhoursforuser: AttendanceOut!
+  totalhoursforAll: [AttendanceOutforAll!]!
+}
+
+input LeaveInput {
+  subject: String!
+  reason: String!
+  start: DateTime!
+  end: DateTime!
+  admin: String!
+  owner: String!
 }

@@ -22,12 +22,14 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     req: Request,
     payload,
   ): Promise<{ admin: boolean; id: mongoose.Schema.Types.ObjectId }> {
+    //  console.log("JWt Run",payload);
     const { email, typeid } = payload;
     const user = await this.userservice.find(email);
-
+  
     if (!user) {
       throw new UnauthorizedException();
     }
+  // console.log("user", user);
     return { admin: user.admin, id: user._id };
   }
 }

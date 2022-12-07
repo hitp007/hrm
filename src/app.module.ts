@@ -44,10 +44,10 @@ import { UserResolver } from './user/user.resolver';
   ],
   controllers: [],
   providers: [
-    {
-      provide: APP_INTERCEPTOR,
-      useClass: TransformInterceptor,
-    },
+    // {
+    //   provide: APP_INTERCEPTOR,
+    //   useClass: TransformInterceptor,
+    // },
     UserResolver,
   ],
 })

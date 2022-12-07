@@ -73,6 +73,7 @@ export class AttendanceService {
     attendance.todaytime = todaytime;
     attendance.outTime = outTime;
     await attendance.save();
+    return attendance;
   }
 
   showinhourandminute(num: number) {

@@ -10,39 +10,47 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.LeaveSchema = exports.Leave = void 0;
+const graphql_1 = require("@nestjs/graphql");
 const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
 let Leave = class Leave {
 };
 __decorate([
+    (0, graphql_1.Field)(),
     (0, mongoose_1.Prop)({ required: true }),
     __metadata("design:type", String)
 ], Leave.prototype, "subject", void 0);
 __decorate([
+    (0, graphql_1.Field)(),
     (0, mongoose_1.Prop)({ required: true }),
     __metadata("design:type", String)
 ], Leave.prototype, "reason", void 0);
 __decorate([
+    (0, graphql_1.Field)(),
     (0, mongoose_1.Prop)({ required: true }),
     __metadata("design:type", Date)
 ], Leave.prototype, "start", void 0);
 __decorate([
+    (0, graphql_1.Field)(),
     (0, mongoose_1.Prop)({ required: true }),
     __metadata("design:type", Date)
 ], Leave.prototype, "end", void 0);
 __decorate([
+    (0, graphql_1.Field)(),
     (0, mongoose_1.Prop)({ required: true }),
     __metadata("design:type", String)
 ], Leave.prototype, "admin", void 0);
 __decorate([
+    (0, graphql_1.Field)({ nullable: true }),
     (0, mongoose_1.Prop)(),
     __metadata("design:type", Boolean)
 ], Leave.prototype, "approve", void 0);
 __decorate([
-    (0, mongoose_1.Prop)({ type: mongoose_2.default.Schema.Types.ObjectId, ref: 'User' }),
+    (0, mongoose_1.Prop)({ type: mongoose_2.default.Schema.Types.ObjectId, ref: "User" }),
     __metadata("design:type", mongoose_2.default.Schema.Types.ObjectId)
 ], Leave.prototype, "owner", void 0);
 Leave = __decorate([
+    (0, graphql_1.ObjectType)(),
     (0, mongoose_1.Schema)()
 ], Leave);
 exports.Leave = Leave;

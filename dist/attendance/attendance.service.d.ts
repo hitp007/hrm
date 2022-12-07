@@ -10,7 +10,9 @@ export declare class AttendanceService {
     }>;
     eachUserTimeById(attendances: any): {};
     totalhoursforAll(): Promise<any[]>;
-    outtime(owner: string): Promise<void>;
+    outtime(owner: string): Promise<Attendance & import("mongoose").Document<any, any, any> & {
+        _id: import("mongoose").Types.ObjectId;
+    }>;
     showinhourandminute(num: number): {
         hours: number;
         minutes: number;
