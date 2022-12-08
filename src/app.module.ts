@@ -32,6 +32,7 @@ import { UserResolver } from './user/user.resolver';
       autoSchemaFile: join(process.cwd(), "src/schema.gql"),
       debug: true,
       playground: true,
+      introspection: true,
     }),
     UserModule,
     LeaveModule,
