@@ -39,6 +39,8 @@ AppModule = __decorate([
             graphql_1.GraphQLModule.forRoot({
                 driver: apollo_1.ApolloDriver,
                 autoSchemaFile: (0, path_1.join)(process.cwd(), "src/schema.gql"),
+                debug: true,
+                playground: true,
             }),
             user_module_1.UserModule,
             leave_module_1.LeaveModule,

@@ -30,6 +30,8 @@ import { UserResolver } from './user/user.resolver';
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), "src/schema.gql"),
+      debug: true,
+      playground: true,
     }),
     UserModule,
     LeaveModule,
