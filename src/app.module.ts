@@ -12,6 +12,7 @@ import { ApolloDriverConfig, ApolloDriver } from '@nestjs/apollo';
 import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
 import { UserResolver } from './user/user.resolver';
+const getErrorCode = require('./finderror');
 // import { ServeStaticModule } from "@nestjs/serve-static";
 @Module({
   imports: [
@@ -30,8 +31,13 @@ import { UserResolver } from './user/user.resolver';
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), "src/schema.gql"),
+      // debug: true,
       playground: true,
       introspection: true,
+      formatError: (err) => {
+        const error = getErrorCode(err.extensions.code);
+        return { message: error.message, statusCode: error.statusCode };
+      },
     }),
     UserModule,
     LeaveModule,

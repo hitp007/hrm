@@ -19,6 +19,7 @@ const apollo_1 = require("@nestjs/apollo");
 const graphql_1 = require("@nestjs/graphql");
 const path_1 = require("path");
 const user_resolver_1 = require("./user/user.resolver");
+const getErrorCode = require('./finderror');
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -39,8 +40,12 @@ AppModule = __decorate([
             graphql_1.GraphQLModule.forRoot({
                 driver: apollo_1.ApolloDriver,
                 autoSchemaFile: (0, path_1.join)(process.cwd(), "src/schema.gql"),
-                debug: true,
                 playground: true,
+                introspection: true,
+                formatError: (err) => {
+                    const error = getErrorCode(err.extensions.code);
+                    return { message: error.message, statusCode: error.statusCode };
+                },
             }),
             user_module_1.UserModule,
             leave_module_1.LeaveModule,
