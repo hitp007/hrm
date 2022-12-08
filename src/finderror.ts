@@ -1,5 +1,13 @@
 
 const errorType = {
+  NotFoundException:{
+    message: "Not Found",
+    statusCode: 400,
+  },
+  BAD_REQUEST: {
+    message: "You Have hit Bad Request.",
+    statusCode: 400,
+  },
   UNAUTHORIZED: {
     message: "Authentication is needed to get requested response.",
     statusCode: 401,
@@ -31,6 +39,10 @@ const errorType = {
   OPERATION_RESOLUTION_FAILURE: {
     message: "opeartion resolution failure",
     statusCode: 400,
+  },
+  UNAUTHENTICATED: {
+    message: "You are not authenticated to access this",
+    statusCode: 403,
   },
 };
 

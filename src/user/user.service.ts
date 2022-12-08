@@ -37,7 +37,7 @@ export class UserService {
   async getUserById(id: string): Promise<User> {
     const user = await this.userModel.findOne({ _id: id, isactive: true });
     if (!user) {
-      throw new Error("user not found");
+      throw new NotFoundException("user not found");
     }
     return user;
   }
