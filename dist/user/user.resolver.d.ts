@@ -13,5 +13,5 @@ export declare class UserResolver {
     createUser(input: InputUserType): Promise<UserType>;
     deleteUser(id: string, context: GraphQLExecutionContext): Promise<string>;
     updateUser(id: string, input: UserUpdateDto, context: GraphQLExecutionContext): Promise<import("./schema/user.schema").User>;
-    getAllUsers(): Promise<import("./schema/user.schema").User[]>;
+    getAllUsers(): Promise<void>;
 }

@@ -14,7 +14,7 @@ export class TransformInterceptor<T>
     context: ExecutionContext,
     next: CallHandler
   ): Observable<any> {
-    console.log('now');
+    // console.log('now');
     return next
       .handle()
       .pipe(

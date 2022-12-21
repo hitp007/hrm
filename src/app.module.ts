@@ -29,13 +29,15 @@ const getErrorCode = require('./finderror');
       connectionName: "tokens",
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
-      driver: ApolloDriver,
+      driver:ApolloDriver,
       autoSchemaFile: join(process.cwd(), "src/schema.gql"),
       playground: true,
       introspection: true,
       formatError: (err) => {
-        const error = getErrorCode(err.extensions.code);
-        return { message: error.message, statusCode: error.statusCode };
+        return {
+          message: err.extensions.exception["response"],
+          statusCode: err.extensions.exception["status"],
+        };
       },
     }),
     UserModule,

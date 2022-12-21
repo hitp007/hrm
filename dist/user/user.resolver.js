@@ -15,12 +15,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserResolver = void 0;
 const common_1 = require("@nestjs/common");
 const graphql_1 = require("@nestjs/graphql");
-const req_guard_1 = require("../guards/req.guard");
 const role_guard_1 = require("../guards/role.guard");
 const create_user_type_dto_1 = require("./dtos/create-user.type.dto");
 const inputype_dto_1 = require("./dtos/inputype.dto");
 const user_update_dto_1 = require("./dtos/user-update.dto");
 const user_service_1 = require("./user.service");
+const sentry_interceptors_1 = require("../Interceptors/sentry.interceptors");
 let UserResolver = class UserResolver {
     constructor(userService) {
         this.userService = userService;
@@ -66,7 +66,7 @@ let UserResolver = class UserResolver {
         throw new common_1.HttpException("Unauthorized to access it", 403);
     }
     async getAllUsers() {
-        return this.userService.findAll();
+        throw new common_1.HttpException("Unauthorized to access it", 403);
     }
 };
 __decorate([
@@ -112,7 +112,6 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UserResolver.prototype, "updateUser", null);
 __decorate([
-    (0, common_1.UseGuards)(role_guard_1.RolesGuard),
     (0, graphql_1.Query)((returns) => [create_user_type_dto_1.UserType]),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
@@ -120,7 +119,7 @@ __decorate([
 ], UserResolver.prototype, "getAllUsers", null);
 UserResolver = __decorate([
     (0, graphql_1.Resolver)((of) => create_user_type_dto_1.UserType),
-    (0, common_1.UseGuards)(req_guard_1.GqlAuthGuard),
+    (0, common_1.UseInterceptors)(sentry_interceptors_1.SentryInterceptor),
     __metadata("design:paramtypes", [user_service_1.UserService])
 ], UserResolver);
 exports.UserResolver = UserResolver;

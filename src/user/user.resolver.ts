@@ -1,4 +1,4 @@
-import { HttpException, Req, UseGuards } from '@nestjs/common';
+import { HttpException, Req, UseGuards, UseInterceptors } from '@nestjs/common';
 import { Args, Context, GraphQLExecutionContext, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { AuthGuard } from '@nestjs/passport';
 import { GqlAuthGuard } from 'src/guards/req.guard';
@@ -8,10 +8,13 @@ import { UserType } from './dtos/create-user.type.dto';
 import { InputUserType } from './dtos/inputype.dto';
 import { UserUpdateDto } from './dtos/user-update.dto';
 import { UserService } from './user.service';
+import { SentryInterceptor } from 'src/Interceptors/sentry.interceptors';
+import { throwError } from 'rxjs';
 
 @Resolver((of) => UserType)
 // @UseGuards(AuthGuard())
-@UseGuards(GqlAuthGuard)
+@UseInterceptors(SentryInterceptor)
+// @UseGuards(GqlAuthGuard)
 export class UserResolver {
   constructor(private userService: UserService) {}
 
@@ -78,9 +81,11 @@ export class UserResolver {
     throw new HttpException("Unauthorized to access it", 403);
   }
 
-  @UseGuards(RolesGuard)
+  // @UseGuards(RolesGuard)
   @Query((returns) => [UserType])
   async getAllUsers() {
-    return this.userService.findAll();
+     throw new HttpException("Unauthorized to access it", 403);
+    // return this.userService.findAll();
+
   }
 }
