@@ -20,7 +20,6 @@ const create_user_type_dto_1 = require("./dtos/create-user.type.dto");
 const inputype_dto_1 = require("./dtos/inputype.dto");
 const user_update_dto_1 = require("./dtos/user-update.dto");
 const user_service_1 = require("./user.service");
-const sentry_interceptors_1 = require("../Interceptors/sentry.interceptors");
 let UserResolver = class UserResolver {
     constructor(userService) {
         this.userService = userService;
@@ -119,7 +118,6 @@ __decorate([
 ], UserResolver.prototype, "getAllUsers", null);
 UserResolver = __decorate([
     (0, graphql_1.Resolver)((of) => create_user_type_dto_1.UserType),
-    (0, common_1.UseInterceptors)(sentry_interceptors_1.SentryInterceptor),
     __metadata("design:paramtypes", [user_service_1.UserService])
 ], UserResolver);
 exports.UserResolver = UserResolver;

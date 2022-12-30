@@ -8,12 +8,10 @@ import { UserType } from './dtos/create-user.type.dto';
 import { InputUserType } from './dtos/inputype.dto';
 import { UserUpdateDto } from './dtos/user-update.dto';
 import { UserService } from './user.service';
-import { SentryInterceptor } from 'src/Interceptors/sentry.interceptors';
 import { throwError } from 'rxjs';
 
 @Resolver((of) => UserType)
 // @UseGuards(AuthGuard())
-@UseInterceptors(SentryInterceptor)
 // @UseGuards(GqlAuthGuard)
 export class UserResolver {
   constructor(private userService: UserService) {}
