@@ -1,8 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { RewriteFrames } from "@sentry/integrations";
 // import { TransformInterceptor } from './Interceptors/transform.interceptor';
-import * as Sentry from "@sentry/node";
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   // app.useGlobalInterceptors(new TransformInterceptor());
