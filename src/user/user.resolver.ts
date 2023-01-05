@@ -11,8 +11,8 @@ import { UserService } from './user.service';
 import { throwError } from 'rxjs';
 
 @Resolver((of) => UserType)
-// @UseGuards(AuthGuard())
-// @UseGuards(GqlAuthGuard)
+@UseGuards(AuthGuard())
+@UseGuards(GqlAuthGuard)
 export class UserResolver {
   constructor(private userService: UserService) {}
 
@@ -79,11 +79,11 @@ export class UserResolver {
     throw new HttpException("Unauthorized to access it", 403);
   }
 
-  // @UseGuards(RolesGuard)
+  @UseGuards(RolesGuard)
   @Query((returns) => [UserType])
   async getAllUsers() {
-     throw new HttpException("Unauthorized to access it", 403);
-    // return this.userService.findAll();
+    //  throw new HttpException("Unauthorized to access it", 403);
+    return this.userService.findAll();
 
   }
 }
